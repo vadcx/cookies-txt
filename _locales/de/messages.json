@@ -14,5 +14,13 @@
   "popupSitesCurrent": {
     "message": "Aktuelle Website",
     "description": "Popup option text for exporting cookies only from the current site"
+  },
+  "popupSitesContainerAll": {
+    "message": "Current Container",
+    "description": "Popup option text for exporting all cookies from the current container"
+  },
+  "popupSitesContainerCurrent": {
+    "message": "Current Container and Site",
+    "description": "Popup option text for exporting cookies only from the current site and current container"
   }
 }

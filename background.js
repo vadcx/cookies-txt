@@ -99,8 +99,15 @@ async function getCookies(stores_filter) {
 
 function handleClick(filter = {}) {
   browser.cookies.getAllCookieStores(stores =>
-      getCookies({stores: stores, filter: filter})
-    );
+      getCookies({
+        stores: stores.filter(store =>
+          // if cookieStoreId is not provided, do not filter
+          (filter.cookieStoreId == undefined) ||
+          // if cookieStoreId is provided, only provide that store
+          (store.id == filter.cookieStoreId)),
+        filter: {url: filter.url}
+    })
+  );
 }
 
 browser.runtime.onMessage.addListener(handleClick)

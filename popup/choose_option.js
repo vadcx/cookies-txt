@@ -18,3 +18,23 @@ document.querySelector(".current").addEventListener("click", () => {
       });
   window.close();
 });
+document.querySelector(".container-all").addEventListener("click", () => {
+  var query = (typeof browser === "undefined") ? {active: true, windowId : browser.windows.WINDOW_ID_CURRENT}
+    :  {active: true, currentWindow: true};
+  browser.tabs.query(query, tabs => {
+        if (tabs.length > 0) {
+          browser.runtime.sendMessage({cookieStoreId: tabs[0].cookieStoreId});
+        }
+      });
+  window.close();
+});
+document.querySelector(".container-current").addEventListener("click", () => {
+  var query = (typeof browser === "undefined") ? {active: true, windowId : browser.windows.WINDOW_ID_CURRENT}
+    :  {active: true, currentWindow: true};
+  browser.tabs.query(query, tabs => {
+        if (tabs.length > 0) {
+          browser.runtime.sendMessage({url: tabs[0].url, cookieStoreId: tabs[0].cookieStoreId});
+        }
+      });
+  window.close();
+});
