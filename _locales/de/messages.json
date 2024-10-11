@@ -16,11 +16,11 @@
     "description": "Popup option text for exporting cookies only from the current site"
   },
   "popupSitesContainerAll": {
-    "message": "Current Container",
+    "message": "Aktueller Container",
     "description": "Popup option text for exporting all cookies from the current container"
   },
   "popupSitesContainerCurrent": {
-    "message": "Current Container and Site",
+    "message": "Aktueller Container und Website",
     "description": "Popup option text for exporting cookies only from the current site and current container"
   }
 }
