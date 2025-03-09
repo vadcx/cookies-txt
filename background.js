@@ -74,14 +74,8 @@ async function saveCookies(cookies, storeId) {
 async function getCookies(stores_filter) {
   for (var store of stores_filter.stores) {
     try {
-      query = (browser.runtime.getBrowserInfo().version >= "59.0")?
-        { ...stores_filter.filter,
-          ...{ storeId: store.id, firstPartyDomain: null }
-        }
-      : { ...stores_filter.filter,
-          ...{ storeId: store.id }
-        };
-
+      query = { ...stores_filter.filter, ...{ storeId: store.id,
+        firstPartyDomain: null } };
       cookies = await browser.cookies.getAll(query);
       await saveCookies(cookies, store.id);
     } catch(e) {
