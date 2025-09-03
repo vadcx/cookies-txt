@@ -10,7 +10,7 @@ function formatCookie(co) {
     co.hostOnly ? 'FALSE' : 'TRUE',
     co.path,
     co.secure ? 'TRUE' : 'FALSE',
-    co.session || !co.expirationDate ? 0 : co.expirationDate,
+    co.session || !co.expirationDate ? 0 : Math.floor(co.expirationDate),
     co.name,
     co.value + '\n'
   ].join('\t');
