@@ -5,20 +5,30 @@ for (const elem of document.querySelectorAll("[data-i18n]")) {
 }
 
 queryWithCurrentTab = (tabToMsgFn) => {
-  var query = (typeof browser === "undefined") ? {active: true, windowId : browser.windows.WINDOW_ID_CURRENT}
-    :  {active: true, currentWindow: true};
+  var query = (typeof browser === "undefined") ? { active: true, windowId: browser.windows.WINDOW_ID_CURRENT }
+    : { active: true, currentWindow: true };
   browser.tabs.query(query, tabs => {
-        if (tabs.length > 0) {
-          browser.runtime.sendMessage(tabToMsgFn(tabs[0]));
-        }
-      });
+    if (tabs.length > 0) {
+      browser.runtime.sendMessage(tabToMsgFn(tabs[0]));
+    }
+  });
   window.close();
 };
 
-document.querySelector(".all").addEventListener("click", () => {
+//download buttons
+document.querySelector("#all .download").addEventListener("click", () => {
   browser.runtime.sendMessage({});
   window.close();
 });
-document.querySelector(".current").addEventListener("click", () => queryWithCurrentTab((tab) => ({url: tab.url})));
-document.querySelector(".container-all").addEventListener("click", () => queryWithCurrentTab((tab) => ({cookieStoreId: tab.cookieStoreId})));
-document.querySelector(".container-current").addEventListener("click", () => queryWithCurrentTab((tab) => ({url: tab.url, cookieStoreId: tab.cookieStoreId})));
+document.querySelector("#current .download").addEventListener("click", () => queryWithCurrentTab((tab) => ({ url: tab.url })));
+document.querySelector("#container-all .download").addEventListener("click", () => queryWithCurrentTab((tab) => ({ cookieStoreId: tab.cookieStoreId })));
+document.querySelector("#container-current .download").addEventListener("click", () => queryWithCurrentTab((tab) => ({ url: tab.url, cookieStoreId: tab.cookieStoreId })));
+
+//copy buttons
+document.querySelector("#all .copy").addEventListener("click", () => {
+  browser.runtime.sendMessage({ clipboard: true });
+  window.close();
+});
+document.querySelector("#current .copy").addEventListener("click", () => queryWithCurrentTab((tab) => ({ url: tab.url, clipboard: true })));
+document.querySelector("#container-all .copy").addEventListener("click", () => queryWithCurrentTab((tab) => ({ cookieStoreId: tab.cookieStoreId, clipboard: true })));
+document.querySelector("#container-current .copy").addEventListener("click", () => queryWithCurrentTab((tab) => ({ url: tab.url, cookieStoreId: tab.cookieStoreId, clipboard: true })));
